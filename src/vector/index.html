@@ -63,38 +63,38 @@
     <section id="matrixchat" style="height: 100%;" class="notranslate"></section>
     <script src="<%= htmlWebpackPlugin.files.js.find(entry => entry.includes("bundle.js")) %>"></script>
 
-    <!-- Legacy supporting Prefetch images -->
-    <img src="<%= require('matrix-react-sdk/res/img/warning.svg').default %>" aria-hidden alt="" width="24" height="23" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>
-    <img src="<%= require('matrix-react-sdk/res/img/e2e/warning.svg').default %>" aria-hidden alt="" width="24" height="23" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>
-    <img src="<%= require('matrix-react-sdk/res/img/feather-customised/warning-triangle.svg').default %>" aria-hidden alt="" width="24" height="23" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>
-    <img src="<%= require('matrix-react-sdk/res/img/format/bold.svg').default %>" aria-hidden alt="" width="25" height="22" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>
-    <img src="<%= require('matrix-react-sdk/res/img/format/code.svg').default %>" aria-hidden alt="" width="25" height="22" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>
-    <img src="<%= require('matrix-react-sdk/res/img/format/italics.svg').default %>" aria-hidden alt="" width="25" height="22" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>
-    <img src="<%= require('matrix-react-sdk/res/img/format/quote.svg').default %>" aria-hidden alt="" width="25" height="22" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>
-    <img src="<%= require('matrix-react-sdk/res/img/format/strikethrough.svg').default %>" aria-hidden alt="" width="25" height="22" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>
+<!--    &lt;!&ndash; Legacy supporting Prefetch images &ndash;&gt;-->
+<!--    <img src="<%= require('matrix-react-sdk/res/img/warning.svg').default %>" aria-hidden alt="" width="24" height="23" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>-->
+<!--    <img src="<%= require('matrix-react-sdk/res/img/e2e/warning.svg').default %>" aria-hidden alt="" width="24" height="23" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>-->
+<!--    <img src="<%= require('matrix-react-sdk/res/img/feather-customised/warning-triangle.svg').default %>" aria-hidden alt="" width="24" height="23" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>-->
+<!--    <img src="<%= require('matrix-react-sdk/res/img/format/bold.svg').default %>" aria-hidden alt="" width="25" height="22" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>-->
+<!--    <img src="<%= require('matrix-react-sdk/res/img/format/code.svg').default %>" aria-hidden alt="" width="25" height="22" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>-->
+<!--    <img src="<%= require('matrix-react-sdk/res/img/format/italics.svg').default %>" aria-hidden alt="" width="25" height="22" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>-->
+<!--    <img src="<%= require('matrix-react-sdk/res/img/format/quote.svg').default %>" aria-hidden alt="" width="25" height="22" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>-->
+<!--    <img src="<%= require('matrix-react-sdk/res/img/format/strikethrough.svg').default %>" aria-hidden alt="" width="25" height="22" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>-->
 
-    <audio id="messageAudio">
-        <source src="media/message.ogg" type="audio/ogg" />
-        <source src="media/message.mp3" type="audio/mpeg" />
-    </audio>
-    <audio id="ringAudio" loop>
-        <source src="media/ring.ogg" type="audio/ogg" />
-        <source src="media/ring.mp3" type="audio/mpeg" />
-    </audio>
-    <audio id="ringbackAudio" loop>
-        <source src="media/ringback.ogg" type="audio/ogg" />
-        <source src="media/ringback.mp3" type="audio/mpeg" />
-    </audio>
-    <audio id="callendAudio">
-        <source src="media/callend.ogg" type="audio/ogg" />
-        <source src="media/callend.mp3" type="audio/mpeg" />
-    </audio>
-    <audio id="busyAudio">
-        <source src="media/busy.ogg" type="audio/ogg" />
-        <source src="media/busy.mp3" type="audio/mpeg" />
-    </audio>
-    <audio id="remoteAudio"></audio>
-    <!-- let CSS themes pass constants to the app -->
-    <div id="mx_theme_accentColor"></div><div id="mx_theme_secondaryAccentColor"></div><div id="mx_theme_tertiaryAccentColor"></div>
+<!--    <audio id="messageAudio">-->
+<!--        <source src="media/message.ogg" type="audio/ogg" />-->
+<!--        <source src="media/message.mp3" type="audio/mpeg" />-->
+<!--    </audio>-->
+<!--    <audio id="ringAudio" loop>-->
+<!--        <source src="media/ring.ogg" type="audio/ogg" />-->
+<!--        <source src="media/ring.mp3" type="audio/mpeg" />-->
+<!--    </audio>-->
+<!--    <audio id="ringbackAudio" loop>-->
+<!--        <source src="media/ringback.ogg" type="audio/ogg" />-->
+<!--        <source src="media/ringback.mp3" type="audio/mpeg" />-->
+<!--    </audio>-->
+<!--    <audio id="callendAudio">-->
+<!--        <source src="media/callend.ogg" type="audio/ogg" />-->
+<!--        <source src="media/callend.mp3" type="audio/mpeg" />-->
+<!--    </audio>-->
+<!--    <audio id="busyAudio">-->
+<!--        <source src="media/busy.ogg" type="audio/ogg" />-->
+<!--        <source src="media/busy.mp3" type="audio/mpeg" />-->
+<!--    </audio>-->
+<!--    <audio id="remoteAudio"></audio>-->
+<!--    &lt;!&ndash; let CSS themes pass constants to the app &ndash;&gt;-->
+<!--    <div id="mx_theme_accentColor"></div><div id="mx_theme_secondaryAccentColor"></div><div id="mx_theme_tertiaryAccentColor"></div>-->
   </body>
 </html>
