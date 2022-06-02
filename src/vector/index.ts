@@ -18,10 +18,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { logger } from "matrix-js-sdk/src/logger";
+import {logger} from "matrix-js-sdk/src/logger";
 
 // These are things that can run before the skin loads - be careful not to reference the react-sdk though.
-import { parseQsFromFragment } from "./url_utils";
+import {parseQsFromFragment} from "./url_utils";
 import './modernizr';
 
 // Require common CSS here; this will make webpack process it into bundle.css.
@@ -102,7 +102,11 @@ const supportedBrowser = checkBrowserFeatures();
 // We start loading stuff but don't block on it until as late as possible to allow
 // the browser to use as much parallelism as it can.
 // Load parallelism is based on research in https://github.com/vector-im/element-web/issues/12253
-async function start() {
+interface RootSupplier {
+    (): HTMLElement;
+}
+
+async function start(rootNodeSupplier: RootSupplier = () => document.getElementById('matrixchat')) {
     // load init.ts async so that its code is not executed immediately and we can catch any exceptions
     const {
         rageshakePromise,
@@ -197,7 +201,7 @@ async function start() {
                         "Please correct the problem and reload the page."),
                     _t(
                         "The message from the parser is: %(message)s",
-                        { message: error.err.message || _t("Invalid JSON") },
+                        {message: error.err.message || _t("Invalid JSON")},
                     ),
                 ]);
             }
@@ -219,7 +223,7 @@ async function start() {
 
         // Finally, load the app. All of the other react-sdk imports are in this file which causes the skinner to
         // run on the components.
-        await loadApp(fragparts.params);
+        await loadApp(fragparts.params, rootNodeSupplier);
     } catch (err) {
         logger.error(err);
         // Like the compatibility page, AWOOOOOGA at the user
@@ -230,23 +234,38 @@ async function start() {
     }
 }
 
-start().catch(err => {
-    logger.error(err);
-    // show the static error in an iframe to not lose any context / console data
-    // with some basic styling to make the iframe full page
-    delete document.body.style.height;
-    const iframe = document.createElement("iframe");
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore - typescript seems to only like the IE syntax for iframe sandboxing
-    iframe["sandbox"] = "";
-    iframe.src = supportedBrowser ? "static/unable-to-load.html" : "static/incompatible-browser.html";
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.position = "absolute";
-    iframe.style.top = "0";
-    iframe.style.left = "0";
-    iframe.style.right = "0";
-    iframe.style.bottom = "0";
-    iframe.style.border = "0";
-    document.getElementById("matrixchat").appendChild(iframe);
-});
+export class VectorChat extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({ mode: "open" });
+    }
+
+    connectedCallback() {
+        console.log("inside connectedcallback");
+        const mountPoint = document.createElement('section');
+        this.shadowRoot.appendChild(mountPoint);
+
+        start(() => mountPoint).catch(err => {
+            logger.error(err);
+            // show the static error in an iframe to not lose any context / console data
+            // with some basic styling to make the iframe full page
+            delete document.body.style.height;
+            const iframe = document.createElement("iframe");
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore - typescript seems to only like the IE syntax for iframe sandboxing
+            iframe["sandbox"] = "";
+            iframe.src = supportedBrowser ? "static/unable-to-load.html" : "static/incompatible-browser.html";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.position = "absolute";
+            iframe.style.top = "0";
+            iframe.style.left = "0";
+            iframe.style.right = "0";
+            iframe.style.bottom = "0";
+            iframe.style.border = "0";
+            document.getElementById("matrixchat").appendChild(iframe);
+        });
+    }
+}
+
+customElements.define('vector-chat', VectorChat);

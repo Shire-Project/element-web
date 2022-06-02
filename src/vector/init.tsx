@@ -27,13 +27,13 @@ import * as languageHandler from "matrix-react-sdk/src/languageHandler";
 import SettingsStore from "matrix-react-sdk/src/settings/SettingsStore";
 import PlatformPeg from "matrix-react-sdk/src/PlatformPeg";
 import SdkConfig from "matrix-react-sdk/src/SdkConfig";
-import { setTheme } from "matrix-react-sdk/src/theme";
-import { logger } from "matrix-js-sdk/src/logger";
+import {setTheme} from "matrix-react-sdk/src/theme";
+import {logger} from "matrix-js-sdk/src/logger";
 
 import ElectronPlatform from "./platform/ElectronPlatform";
 import PWAPlatform from "./platform/PWAPlatform";
 import WebPlatform from "./platform/WebPlatform";
-import { initRageshake, initRageshakeStore } from "./rageshakesetup";
+import {initRageshake, initRageshakeStore} from "./rageshakesetup";
 
 export const rageshakePromise = initRageshake();
 
@@ -131,21 +131,26 @@ export async function loadTheme() {
     setTheme();
 }
 
-export async function loadApp(fragParams: {}) {
+interface RootSupplier {
+    (): HTMLElement;
+}
+
+export async function loadApp(fragParams: {},
+                              rootNodeSupplier: RootSupplier = () => document.getElementById('matrixchat')) {
     // load app.js async so that its code is not executed immediately and we can catch any exceptions
     const module = await import(
         /* webpackChunkName: "element-web-app" */
         /* webpackPreload: true */
         "./app");
     window.matrixChat = ReactDOM.render(await module.loadApp(fragParams),
-        document.getElementById('matrixchat'));
+        rootNodeSupplier());
 }
 
 export async function showError(title: string, messages?: string[]) {
     const ErrorView = (await import(
         /* webpackChunkName: "error-view" */
         "../async-components/structures/ErrorView")).default;
-    window.matrixChat = ReactDOM.render(<ErrorView title={title} messages={messages} />,
+    window.matrixChat = ReactDOM.render(<ErrorView title={title} messages={messages}/>,
         document.getElementById('matrixchat'));
 }
 
@@ -153,7 +158,7 @@ export async function showIncompatibleBrowser(onAccept) {
     const CompatibilityView = (await import(
         /* webpackChunkName: "compatibility-view" */
         "../async-components/structures/CompatibilityView")).default;
-    window.matrixChat = ReactDOM.render(<CompatibilityView onAccept={onAccept} />,
+    window.matrixChat = ReactDOM.render(<CompatibilityView onAccept={onAccept}/>,
         document.getElementById('matrixchat'));
 }
 
