@@ -242,6 +242,9 @@ export class VectorChat extends HTMLElement {
 
     connectedCallback() {
         console.log("inside connectedcallback");
+        this.shadowRoot.innerHTML = `
+            <slot></slot>
+        `;
         const mountPoint = document.createElement('section');
         this.shadowRoot.appendChild(mountPoint);
 
