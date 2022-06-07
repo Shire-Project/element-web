@@ -24,6 +24,8 @@ import type { IConfigOptions } from "matrix-react-sdk/src/IConfigOptions";
 import { getVectorConfig } from "../getconfig";
 import Favicon from "../../favicon";
 
+import variables from '../variables';
+
 /**
  * Vector-specific extensions to the BasePlatform template
  */
@@ -31,7 +33,7 @@ export default abstract class VectorBasePlatform extends BasePlatform {
     protected _favicon: Favicon;
 
     async getConfig(): Promise<IConfigOptions> {
-        return getVectorConfig();
+        return getVectorConfig(variables.hostname);
     }
 
     getHumanReadableName(): string {

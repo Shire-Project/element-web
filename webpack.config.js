@@ -649,6 +649,8 @@ module.exports = (env, argv) => {
             // chunks even after the app is redeployed.
             filename: "bundles/[hash]/[name].js",
             chunkFilename: "bundles/[hash]/[name].js",
+
+            publicPath: "http://localhost:4000/",
         },
 
         // configuration for the webpack-dev-server

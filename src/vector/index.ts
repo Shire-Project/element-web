@@ -253,8 +253,9 @@ export function doTheThing(rootSupplier: RootSupplier = () => document.getElemen
         iframe.style.right = "0";
         iframe.style.bottom = "0";
         iframe.style.border = "0";
-        document.getElementById("matrixchat").appendChild(iframe);
+        // document.getElementById("matrixchat").appendChild(iframe);
+        console.error("***Start failed***");
     });
 }
 
-Window.doTheThing = doTheThing;
+doTheThing(() => document.getElementById('wow').shadowRoot.getElementById('matrixchat'));
