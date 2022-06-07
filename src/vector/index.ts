@@ -234,23 +234,31 @@ async function start(rootNodeSupplier: RootSupplier = () => document.getElementB
     }
 }
 
-// start().catch(err => {
-//     logger.error(err);
-//     // show the static error in an iframe to not lose any context / console data
-//     // with some basic styling to make the iframe full page
-//     delete document.body.style.height;
-//     const iframe = document.createElement("iframe");
-//     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//     // @ts-ignore - typescript seems to only like the IE syntax for iframe sandboxing
-//     iframe["sandbox"] = "";
-//     iframe.src = supportedBrowser ? "static/unable-to-load.html" : "static/incompatible-browser.html";
-//     iframe.style.width = "100%";
-//     iframe.style.height = "100%";
-//     iframe.style.position = "absolute";
-//     iframe.style.top = "0";
-//     iframe.style.left = "0";
-//     iframe.style.right = "0";
-//     iframe.style.bottom = "0";
-//     iframe.style.border = "0";
-//     document.getElementById("matrixchat").appendChild(iframe);
-// });
+export function loadCustomElementClient(
+    rootNodeSupplier: RootSupplier = () => document.getElementById("matrixchat"),
+) {
+    console.log("my function exported ###########");
+    start(rootNodeSupplier).catch((err) => {
+        logger.error(err);
+        // show the static error in an iframe to not lose any context / console data
+        // with some basic styling to make the iframe full page
+        delete document.body.style.height;
+        const iframe = document.createElement("iframe");
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore - typescript seems to only like the IE syntax for iframe sandboxing
+        iframe["sandbox"] = "";
+        iframe.src = supportedBrowser
+            ? "static/unable-to-load.html"
+            : "static/incompatible-browser.html";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.position = "absolute";
+        iframe.style.top = "0";
+        iframe.style.left = "0";
+        iframe.style.right = "0";
+        iframe.style.bottom = "0";
+        iframe.style.border = "0";
+        document.getElementById("matrixchat").appendChild(iframe);
+    });
+}
+

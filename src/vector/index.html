@@ -52,20 +52,6 @@
 <!--    <section id="matrixchat" style="height: 100%;" class="notranslate"></section>-->
 
     <script src="<%= htmlWebpackPlugin.files.js.find(entry => entry.includes("bundle.js")) %>"></script>
-    <vector-chat>
-        <% for (var i=0; i < htmlWebpackPlugin.files.css.length; i++) {
-        var file = htmlWebpackPlugin.files.css[i];
-        var match = file.match(/^bundles\/.*?\/theme-(.*)\.css$/);
-        if (match) {
-            var title = match[1].charAt(0).toUpperCase() + match[1].slice(1);
-            if (title === "light") {
-        %>
-        <link rel="stylesheet" data-mx-theme="<%= title %>" title="<%= title %>" href="<%= file %>">
-            <% } } else { %>
-        <link rel="stylesheet" href="<%= file %>">
-        <% }
-        } %>
-    </vector-chat>
 
 <!--    &lt;!&ndash; Legacy supporting Prefetch images &ndash;&gt;-->
 <!--    <img src="<%= require('matrix-react-sdk/res/img/warning.svg').default %>" aria-hidden alt="" width="24" height="23" style="visibility: hidden; position: absolute; top: 0px; left: 0px;"/>-->
