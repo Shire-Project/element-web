@@ -106,7 +106,7 @@ interface RootSupplier {
     (): HTMLElement;
 }
 
-async function start(rootNodeSupplier: RootSupplier = () => document.getElementById('matrixchat')) {
+export async function start(rootNodeSupplier: RootSupplier = () => document.getElementById('matrixchat')) {
     // load init.ts async so that its code is not executed immediately and we can catch any exceptions
     const {
         rageshakePromise,
