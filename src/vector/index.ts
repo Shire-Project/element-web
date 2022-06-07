@@ -256,3 +256,5 @@ export function doTheThing(rootSupplier: RootSupplier = () => document.getElemen
         document.getElementById("matrixchat").appendChild(iframe);
     });
 }
+
+Window.doTheThing = doTheThing;
